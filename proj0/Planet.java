@@ -18,12 +18,15 @@ public class Planet {
 	}
 
 	public Planet(Planet p) {
+		/*
 		xxPos = p.xxPos;
 		yyPos = p.yyPos;
 		xxVel = p.xxVel;
 		yyVel = p.yyVel;
 		mass = p.mass;
 		imgFileName = p.imgFileName;
+		*/
+		this(p.xxPos, p.yyPos, p.xxVel, p.yyVel, p.mass, p.imgFileName);
 	}
 
 	public double calcDistance(Planet p) {
