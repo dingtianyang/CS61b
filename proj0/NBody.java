@@ -43,6 +43,10 @@ public class NBody {
 			p.draw();
 		}
 
+		// Play the theme to 2001: A Space Odyssey
+		String audioToPlay = "audio/2001.mid";
+		StdAudio.play(audioToPlay);
+
 		// Creating an Animation
 		StdDraw.enableDoubleBuffering();
 		for (int t = 0; t <= T;) {
