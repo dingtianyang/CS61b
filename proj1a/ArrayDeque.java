@@ -5,7 +5,7 @@ public class ArrayDeque<T> {
     private T[] items;
 
     public ArrayDeque() {
-        items = (T[]) new Object[8];
+        items = (T[]) new Object[4];
         nextFirst = 0;
         nextLast = 1;
         size = 0;
@@ -15,7 +15,7 @@ public class ArrayDeque<T> {
         if (size == items.length) {
             T[] a = (T[]) new Object[size * 2];
             System.arraycopy(items, nextFirst + 1, a, 0, items.length - nextFirst - 1);
-            System.arraycopy(items, 0, a, items.length - nextFirst -1, nextFirst + 1);
+            System.arraycopy(items, 0, a, items.length - nextFirst - 1, nextFirst + 1);
             items = a;
             nextFirst = items.length - 1;
             nextLast = size;
@@ -136,32 +136,36 @@ public class ArrayDeque<T> {
         if (index < 0 || index >= size) {
             return null;
         }
-        if (nextFirst + index + 1 <= items.length) {
+        if (nextFirst + index + 1 <= items.length - 1) {
             return items[nextFirst + index + 1];
         }
         return items[index - (items.length - nextFirst - 1)];
     }
 
+    /*
     public static void main(String[] args) {
         ArrayDeque<Integer> A = new ArrayDeque<>();
         A.addLast(0);
         A.addLast(1);
         A.addLast(2);
         A.addLast(3);
-        A.addLast(4);
+        A.addFirst(4);
         A.addLast(5);
-        A.addLast(6);
+        A.addFirst(6);
         A.addLast(7);
         A.addLast(8);
-        A.addLast(9);
-        A.addLast(10);
-        A.addLast(11);
-        A.addLast(12);
-        A.addLast(13);
-        A.addLast(14);
-        A.addLast(15);
-        A.addLast(16);
+        A.addFirst(9);
+        A.addFirst(10);
+        A.addFirst(11);
 
+
+
+
+
+        System.out.println(A.size());
+        System.out.println(A.get());
+        System.out.println();
+        A.printDeque();
         System.out.println("");
-    }
+    }*/
 }
