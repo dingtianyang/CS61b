@@ -5,7 +5,7 @@ public class ArrayDeque<T> {
     private T[] items;
 
     public ArrayDeque() {
-        items = (T[]) new Object[4];
+        items = (T[]) new Object[8];
         nextFirst = 0;
         nextLast = 1;
         size = 0;
@@ -52,7 +52,7 @@ public class ArrayDeque<T> {
             resize();
         }
         items[nextLast] = item;
-        if (nextLast < items.length -1) {
+        if (nextLast < items.length - 1) {
             nextLast += 1;
         } else {
             nextLast = 0;
@@ -69,7 +69,7 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        for (int i = 0; i < size; i ++) {
+        for (int i = 0; i < size; i++) {
             System.out.print(get(i));
             System.out.print(' ');
         }
@@ -82,8 +82,7 @@ public class ArrayDeque<T> {
             return null;
         }
 
-        if (nextFirst + 1 < items.length)
-        {
+        if (nextFirst + 1 < items.length) {
             item = items[nextFirst + 1];
             items[nextFirst + 1] = null;
             nextFirst = nextFirst + 1;
@@ -94,14 +93,14 @@ public class ArrayDeque<T> {
         }
         size -= 1;
 
-        if (items.length >= 16 && (double) (size / items.length) < 0.25 ) {
+        if (items.length >= 16 && (double) (size / items.length) < 0.25) {
             T[] a = (T[]) new Object[items.length / 2];
 
             if (nextFirst < nextLast) {
                 System.arraycopy(items, nextFirst + 1, a, 0, size);
             } else {
                 System.arraycopy(items, nextFirst + 1, a, 0, items.length - nextFirst - 1);
-                System.arraycopy(items, 0, a, items.length - nextFirst -1, nextLast);
+                System.arraycopy(items, 0, a, items.length - nextFirst - 1, nextLast);
             }
             items = a;
             nextFirst = items.length - 1;
@@ -128,14 +127,14 @@ public class ArrayDeque<T> {
         }
         size -= 1;
 
-        if (items.length >= 16 && (double) (size / items.length) < 0.25 ) {
+        if (items.length >= 16 && (4 * size) < items.length) {
             T[] a = (T[]) new Object[items.length / 2];
 
             if (nextFirst < nextLast) {
                 System.arraycopy(items, nextFirst + 1, a, 0, size);
             } else {
                 System.arraycopy(items, nextFirst + 1, a, 0, items.length - nextFirst - 1);
-                System.arraycopy(items, 0, a, items.length - nextFirst -1, nextLast);
+                System.arraycopy(items, 0, a, items.length - nextFirst - 1, nextLast);
             }
             items = a;
             nextFirst = items.length - 1;
@@ -160,24 +159,25 @@ public class ArrayDeque<T> {
         ArrayDeque<Integer> A = new ArrayDeque<>();
         A.addLast(0);
         A.addLast(1);
-        A.removeFirst();
+
         A.addLast(2);
         A.addLast(3);
-        A.removeFirst();
-        A.removeLast();
         A.addFirst(4);
         A.addLast(5);
-        A.removeFirst();
         A.addFirst(6);
         A.addLast(7);
-        A.removeFirst();
         A.addLast(8);
         A.addFirst(9);
-        A.removeLast();
         A.addFirst(10);
-        A.addFirst(11);
 
-
+        A.removeLast();
+        A.removeLast();
+        A.removeFirst();
+        A.removeFirst();
+        A.removeFirst();
+        A.removeFirst();
+        A.removeFirst();
+        A.removeFirst();
 
         System.out.println(A.size());
         System.out.println(A.get(0));
