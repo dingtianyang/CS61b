@@ -1,6 +1,6 @@
 public class LinkedListDeque<T> {
 
-    public class Node {
+    private class Node {
         public T item;
         public Node next;
         public Node prev;
@@ -15,13 +15,14 @@ public class LinkedListDeque<T> {
     private Node sentinel;
     private int size;
 
+    /*
     public LinkedListDeque(T i) {
         sentinel = new Node(null, null, null);
         Node p = new Node(i, sentinel, sentinel);
         sentinel.next = p;
         sentinel.prev = p;
         size = 1;
-    }
+    }*/
 
     /* Creates an empty Deque. */
     public LinkedListDeque() {
@@ -116,6 +117,7 @@ public class LinkedListDeque<T> {
         return getRecursive(sentinel.next.next, index - 1);
     }
 
+    /*
     public static void main(String[] args) {
         LinkedListDeque<String> L = new LinkedListDeque<>("back");
         L.addFirst("is");
@@ -135,5 +137,5 @@ public class LinkedListDeque<T> {
         LinkedListDeque<Integer> LL = new LinkedListDeque<>();
         System.out.println(LL.size());
         System.out.println(LL.isEmpty());
-    }
+    }*/
 }
