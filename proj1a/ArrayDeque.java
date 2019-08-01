@@ -93,7 +93,7 @@ public class ArrayDeque<T> {
         }
         size -= 1;
 
-        if (items.length >= 16 && (double) (size / items.length) < 0.25) {
+        if (items.length >= 16 && (4 * size) < items.length) {
             T[] a = (T[]) new Object[items.length / 2];
 
             if (nextFirst < nextLast) {
