@@ -1,4 +1,14 @@
-package PACKAGE_NAME;
+public class OffByN implements CharacterComparator {
 
-public class OffByN {
+    private int diff;
+
+    public OffByN(int N) {
+        diff = N;
+    }
+
+    @Override
+    public boolean equalChars(char x, char y) {
+        return diff == x - y || diff == y - x;
+    }
+
 }
