@@ -29,11 +29,16 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         if (isFull()) {
             throw new RuntimeException("Ring buffer overflow");
         }
+        /*
         if (last == capacity) {
             last = 0;
         }
+        */
         rb[last] = x;
         last += 1;
+        if (last == capacity) {
+            last = 0;
+        }
         fillCount += 1;
     }
 
@@ -46,12 +51,17 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         if (isEmpty()) {
             throw new RuntimeException("Ring buffer underflow");
         }
+        /*
         if (first == capacity) {
             first = 0;
         }
+        */
         T item = rb[first];
         rb[first] = null;
         first += 1;
+        if (first == capacity) {
+            first = 0;
+        }
         fillCount -= 1;
         return item;
     }
@@ -63,37 +73,64 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         if (isEmpty()) {
             throw new RuntimeException("Ring buffer underflow");
         }
+        /*
         if (first == capacity) {
             first = 0;
-        }
+        }*/
         return rb[first];
     }
 
     private class ArrayRingBufferIterator implements Iterator<T> {
-        private int wizPos;
+        private int start;
+        private int count;
 
         public ArrayRingBufferIterator() {
-            wizPos = first;
+            start = first;
+            count = 0;
         }
 
         @Override
         public boolean hasNext() {
-            if (wizPos == capacity) {
-                wizPos = 0;
+            /*
+            if (start == end && end == 0) {
+                end = capacity;
             }
-            return wizPos != last;
+            return start != end;*/
+            return count != fillCount;
         }
 
         @Override
         public T next() {
-            T item = rb[wizPos];
-            wizPos += 1;
+            T item = rb[start];
+            start += 1;
+            if (start == capacity) {
+                start = 0;
+            }
+            count += 1;
             return item;
         }
-
     }
 
+    @Override
     public Iterator<T> iterator() {
         return new ArrayRingBufferIterator();
     }
+
+    /*
+    public static void main(String[] args) {
+        ArrayRingBuffer<Integer> a = new ArrayRingBuffer<>(3);
+        a.enqueue(1);
+        a.enqueue(2);
+        a.enqueue(3);
+
+
+        a.dequeue();
+        a.dequeue();
+        a.enqueue(4);
+
+        for (int i : a) {
+            System.out.println(i);
+        }
+    }
+    */
 }
