@@ -166,5 +166,5 @@ public class ArrayDeque<T> {
 //        A.printDeque();
 //        System.out.println(A.isEmpty());
 //        System.out.println("");
-    }
+//    }
 }
