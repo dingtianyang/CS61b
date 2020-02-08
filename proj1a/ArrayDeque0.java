@@ -1,10 +1,10 @@
-public class ArrayDeque<T> {
+public class ArrayDeque0<T> {
     private int size;
     private int nextFirst;
     private int nextLast;
     private T[] items;
 
-    public ArrayDeque() {
+    public ArrayDeque0() {
         items = (T[]) new Object[8];
         nextFirst = 0;
         nextLast = 1;

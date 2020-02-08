@@ -1,4 +1,4 @@
-public class LinkedListDeque<T> {
+public class LinkedListDeque0<T> {
 
     private class Node {
         public T item;
@@ -25,7 +25,7 @@ public class LinkedListDeque<T> {
     }*/
 
     /* Creates an empty Deque. */
-    public LinkedListDeque() {
+    public LinkedListDeque0() {
         sentinel = new Node(null, null, null);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;

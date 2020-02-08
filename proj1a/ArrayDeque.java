@@ -1,5 +1,3 @@
-import java.awt.desktop.SystemEventListener;
-
 public class ArrayDeque<T> {
 
     private T[] items;
@@ -15,7 +13,7 @@ public class ArrayDeque<T> {
     }
 
     private void resize(int factor, String method) {
-        if (method == "Up") {
+        if (method.equals("Up")) {
             T[] tmp = (T[]) new Object[size * factor];
             /** If and else can merge after observation.
              if (nextFirst == items.length - 1) {
@@ -29,7 +27,7 @@ public class ArrayDeque<T> {
             System.arraycopy(items, 0, tmp, items.length - 1 - nextFirst, nextFirst + 1);
             items = tmp;
         }
-        if (method == "Down") {
+        if (method.equals("Down")) {
             T[] tmp = (T[]) new Object[size / factor];
             for (int i = 0; i < size; i++) {
                 tmp[i] = get(i);
@@ -96,7 +94,7 @@ public class ArrayDeque<T> {
             nextFirst += 1;
         }
         size -= 1;
-        if (size * 4 < items.length && items.length >= 16) {
+        if ((size * 4) < items.length && items.length >= 16) {
             resize(2, "Down");
         }
         return item;
@@ -117,7 +115,7 @@ public class ArrayDeque<T> {
             nextLast -= 1;
         }
         size -= 1;
-        if (size * 4 < items.length && items.length >= 16) {
+        if ((size * 4) < items.length && items.length >= 16) {
             resize(2, "Down");
         }
         return item;
