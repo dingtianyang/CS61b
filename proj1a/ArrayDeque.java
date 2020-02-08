@@ -12,40 +12,20 @@ public class ArrayDeque<T> {
         nextLast = 1;
     }
 
-    private void resize(int factor, String method) {
-        if (method.equals("Up")) {
-            T[] tmp = (T[]) new Object[items.length * factor];
-//            if (nextFirst == items.length - 1) {
-//                System.arraycopy(items, 0, tmp, 0, size);
-//            } else {
-//                System.arraycopy(items, nextFirst + 1, tmp, 0, items.length - 1 - nextFirst);
-//                System.arraycopy(items, 0, tmp, items.length - 1 - nextFirst, nextLast);
-//            }
-            for (int i = 0; i < size; i++) {
-                tmp[i] = get(i);
-            }
-            items = tmp;
+    private void resize(double factor) {
+        int newLength = (int) (items.length * factor);
+        T[] tmp = (T[]) new Object[newLength];
+        for (int i = 0; i < size; i++) {
+            tmp[i] = get(i);
         }
-        if (method.equals("Down")) {
-            T[] tmp = (T[]) new Object[items.length / factor];
-//            if (nextFirst < nextLast) {
-//                System.arraycopy(items, nextFirst + 1, tmp, 0, size);
-//            } else {
-//                System.arraycopy(items, nextFirst + 1, tmp, 0, items.length - 1 - nextFirst);
-//                System.arraycopy(items, 0, tmp, items.length - 1 - nextFirst, nextLast);
-//            }
-            for (int i = 0; i < size; i++) {
-                tmp[i] = get(i);
-            }
-            items = tmp;
-        }
+        items = tmp;
         nextFirst = items.length - 1;
         nextLast = size;
     }
 
     public void addFirst(T item) {
         if (size == items.length) {
-            resize(2, "Up");
+            resize(2);
         }
         items[nextFirst] = item;
         if (nextFirst == 0) {
@@ -58,7 +38,7 @@ public class ArrayDeque<T> {
 
     public void addLast(T item) {
         if (size == items.length) {
-            resize(2, "Up");
+            resize(2);
         }
         items[nextLast] = item;
         if (nextLast == items.length - 1) {
@@ -100,7 +80,7 @@ public class ArrayDeque<T> {
         }
         size -= 1;
         if ((size * 4) < items.length && items.length >= 16) {
-            resize(2, "Down");
+            resize(0.5);
         }
         return item;
     }
@@ -121,7 +101,7 @@ public class ArrayDeque<T> {
         }
         size -= 1;
         if ((size * 4) < items.length && items.length >= 16) {
-            resize(2, "Down");
+            resize(0.5);
         }
         return item;
     }
@@ -135,36 +115,4 @@ public class ArrayDeque<T> {
         }
         return items[nextFirst + 1 + index - items.length];
     }
-
-//    public static void main(String[] args) {
-//        ArrayDeque<Integer> A = new ArrayDeque<>();
-//        A.addLast(0);
-//        A.addLast(1);
-//
-//        A.addLast(2);
-//        A.addLast(3);
-//        A.addFirst(4);
-//        A.addLast(5);
-//        A.addFirst(6);
-//        A.addLast(7);
-//        A.addLast(8);
-//        A.addFirst(9);
-//        A.addFirst(10);
-//
-//        A.removeLast();
-//        A.removeLast();
-//        A.removeFirst();
-//        A.removeFirst();
-//        A.removeFirst();
-//        A.removeFirst();
-//        A.removeFirst();
-//        A.removeFirst();
-//
-//        System.out.println(A.size());
-//        System.out.println(A.get(0));
-//        System.out.println();
-//        A.printDeque();
-//        System.out.println(A.isEmpty());
-//        System.out.println("");
-//    }
 }
